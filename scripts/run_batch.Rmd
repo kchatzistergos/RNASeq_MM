@@ -113,7 +113,7 @@ docker run -v $raw_dir:/home/seq -v $ref_dir:/home/ref -v $work_dir/results/kall
 
 ## Differential expression analysis
 
-```{r rsetup, echo = T}
+```{r rsetup, echo = T, eval=T}
 #######
 # The following steps are performed in R, in scripts/ directory
 #######
@@ -132,18 +132,18 @@ require(vsn)
 require(RColorBrewer)
 require(ggplot2)
 
-#work_dir<- "/srv/gevaertlab/data/Hong/RNASeq/hb/RNASeq_MM_HB/"
-#opts_knit$set(root.dir = work_dir)
-#sampleID <- scan(paste0(work_dir,"sampleID"),what="character",quiet=TRUE)
-#geneinfo<-read.table(paste0(work_dir,"reference/gene.info"),head=T,sep = "\t")
+work_dir<- "/srv/gevaertlab/data/Hong/RNASeq/hb/RNASeq_MM_HB/"
+opts_knit$set(root.dir = work_dir)
+sampleID <- scan(paste0(work_dir,"sampleID"),what="character",quiet=TRUE)
+geneinfo<-read.table(paste0(work_dir,"reference/gene.info"),head=T,sep = "\t")
 ```
 
 ```{r load_save_worksapce}
-load(file=".RData")
+#load(file=".RData")
 #save.image(file=".RData")
 ```
 
-```{r kallisto, echo = T, eval=FALSE}
+```{r kallisto, echo = T, eval=T}
 #######
 # Get gene-level expression from transcript level results of Kallisto
 #######
@@ -312,13 +312,13 @@ write.table(DESeq.geneanno.out.ordered,file = "DESeq.geneanno.out.ordered.txt",s
 
 __Differential expression analysis without sham3__
 
-```{r Kallisto_a,  echo = T, eval=F}
+```{r Kallisto_a,  echo = T, eval=T}
 # Start with Kallisto data import
 files.kallisto_a <- files.kallisto[-which(names(files.kallisto) %in% c("sham3") )]
 Kallisto.txim_a <- tximport(files.kallisto_a,type="kallisto",tx2gene = tx2gene)
 ```
 
-```{r DESeq_a,  echo = T, eval=F}
+```{r DESeq_a,  echo = T, eval=T}
 # DESeq
 sampleTable_a <- sampleTable[-which(rownames(sampleTable)  %in% c("sham3")),,F]
 dds_a<- DESeqDataSetFromTximport(Kallisto.txim_a,sampleTable_a,~condition)

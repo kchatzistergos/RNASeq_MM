@@ -1,7 +1,8 @@
 #######
 # set up
 #######
-mkdir -p results/kallisto results/salmon
+# In main work directory
+mkdir -p results/kallisto results/salmon logs reference
 
 #######
 # first step: download reference and prepare index. Refer to ../reference
@@ -16,3 +17,7 @@ mkdir -p results/kallisto results/salmon
 ./run_indiv.sh WT_Ang1 Raw_WT_Ang1
 ./run_indiv.sh WT_Ang2 Raw_WT_Ang2
 ./run_indiv.sh WT_Ang3 Raw_WT_Ang3
+
+#######
+## Third step, differential expression analysis. Refer to run_batch.Rmd
+########
